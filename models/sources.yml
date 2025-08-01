@@ -5,6 +5,7 @@ sources:
     database: demo
     schema: demo_schema
     tables:
+      - name: raw_bike
+      - name: raw_weather
       - name: bike
       - name: weather
-      
