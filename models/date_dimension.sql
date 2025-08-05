@@ -11,21 +11,8 @@ WITH
             STARTED_AT,
             TO_DATE(STARTED_AT) AS DATE_STARTED_AT,
             HOUR(STARTED_AT) AS HOUR_STARTED_AT,
-            CASE
-                WHEN DAYNAME(STARTED_AT) IN ('Sat', 'Sun') 
-                    THEN 'WEEKEND' 
-                    ELSE 'BUSINESSDAY'
-                END AS DAY_TYPE,
-
-            CASE
-                WHEN MONTH(STARTED_AT) IN (12, 1, 2)
-                    THEN 'WINTER'
-                WHEN MONTH(STARTED_AT) IN (2, 3, 4)
-                    THEN 'SPRING' 
-                WHEN MONTH(STARTED_AT) IN (5, 6, 7)
-                    THEN 'SUMMER'
-                    ELSE 'AUTUMN'     
-                END AS YEAR_STATION                     
+            {{get_day_type('STARTED_AT')}} AS DAY_TYPE,
+            {{get_season('STARTED_AT')}} AS SEASON_OF_YEAR               
         FROM
             GET_TIMESTAMP
     )
